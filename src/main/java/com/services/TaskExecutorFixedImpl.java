@@ -1,5 +1,6 @@
 package com.services;
 
+import com.entities.Task;
 import com.entities.TaskTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,16 +10,17 @@ import java.util.Comparator;
 import java.util.concurrent.PriorityBlockingQueue;
 
 @Component
-public class FunctionalityImpl implements Functionality {
+public class TaskExecutorFixedImpl implements TaskExecutorFixed {
 
     private PriorityBlockingQueue<TaskTime> queue = new PriorityBlockingQueue(2, Comparator.comparing(TaskTime::getTaskExecutionTime));
 
-//    @Autowired
-//    private TaskExecutor taskExecutor;
+
+    @Autowired
+    private TaskExecutor taskExecutor;
 
     @Override
-    public void addTask(Functionality functionality, LocalDateTime localDateTime) {
-        queue.add(new TaskTime(functionality, localDateTime));
+    public void addTask(Task taskExecutorFixed, LocalDateTime localDateTime) {
+        queue.add(new TaskTime(taskExecutorFixed, localDateTime));
         printQueue();
         exec();
     }
@@ -34,7 +36,6 @@ public class FunctionalityImpl implements Functionality {
             queue.remove(taskTime);
         else if (taskTime != null) {
             System.out.println(String.format("runTask %s", taskTime.toString()));
-            TaskExecutor taskExecutor = new TaskExecutor();
             taskExecutor.runTask(taskTime.getFunctionality(), taskTime.getTaskExecutionTime());
         }
     }

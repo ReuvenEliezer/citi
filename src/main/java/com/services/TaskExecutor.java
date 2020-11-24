@@ -1,11 +1,11 @@
 package com.services;
 
+import com.entities.Task;
+
 import java.time.LocalDateTime;
 
-public class TaskExecutor implements ITaskExecutor {
+public interface TaskExecutor {
 
-    @Override
-    public void runTask(Functionality functionality, LocalDateTime localDateTime) {
-        // outsource impl
-    }
+    void runTask(Task taskExecutorFixed, LocalDateTime localDateTime);
+
 }

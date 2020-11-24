@@ -1,22 +1,20 @@
 package com.entities;
 
-import com.services.Functionality;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TaskTime {
 
-    private Functionality functionality;
+    private Task task;
     private LocalDateTime taskExecutionTime;
 
-    public TaskTime(Functionality functionality, LocalDateTime taskExecutionTime) {
-        this.functionality = functionality;
+    public TaskTime(Task task, LocalDateTime taskExecutionTime) {
+        this.task = task;
         this.taskExecutionTime = taskExecutionTime;
     }
 
-    public Functionality getFunctionality() {
-        return functionality;
+    public Task getFunctionality() {
+        return task;
     }
 
     public LocalDateTime getTaskExecutionTime() {
@@ -29,20 +27,21 @@ public class TaskTime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskTime taskTime = (TaskTime) o;
-        return Objects.equals(functionality, taskTime.functionality) &&
+        return Objects.equals(task, taskTime.task) &&
                 Objects.equals(taskExecutionTime, taskTime.taskExecutionTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(functionality, taskExecutionTime);
+        return Objects.hash(task, taskExecutionTime);
     }
 
     @Override
     public String toString() {
         return "TaskTime{" +
-                "functionality=" + functionality +
+                "task=" + task +
                 ", taskExecutionTime=" + taskExecutionTime +
                 '}';
     }
+
 }
